@@ -5,3 +5,5 @@ print(name)
 
 user_class = input("Choose a class")
 print(user_class)
+
+print("x")
