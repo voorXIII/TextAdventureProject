@@ -12,13 +12,13 @@ class Mage:
     HP = 100
     ATK = 200
 
-class Rouge:
+class Rogue:
     HP = 150
     ATK = 250
 
-user_class = input("Choose a class between Warrior, Mage, or Rouge.\n")
+user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")
 
-while(user_class != 'Warrior' and user_class != 'Mage' and user_class != 'Rouge'):
+while(user_class != 'Warrior' and user_class != 'Mage' and user_class != 'Rogue'):
     print("You did not choose from the required classes, try again.")
     user_class = input()
 
@@ -28,7 +28,7 @@ enter = input("Please press Enter to continue.\n")
 
 print("You must go to the Dungeon and kill a Skeleton to prove your worth.\n")
 
-class Skeleton
+class Skeleton:
     HP = 100
     ATK = 50
 
