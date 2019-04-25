@@ -39,6 +39,7 @@ class Skeleton:
         self.DEF = DEF
         self.Damage = Damage
 
+
 def attack(attacker, attackee):
     hit = random.randint(min_roll, max_roll) + attacker.ATK
 
@@ -49,11 +50,11 @@ def attack(attacker, attackee):
         attackee.HP = attackee.HP - attacker.Damage
 
         if attackee.HP <= 0:  # if the attackee's health drops below zero
-            print("With one more attack,", attackee.Name, "falls to the floor, dead.")
+            print("With a forceful attack,", attackee.Name, "dies.")
         else:
             print(attackee.Name, "has", attackee.HP, "HP remaining.")
     else:
-        print("You missed.")
+        print("You missed. Better defend!")
 
 
 user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")   # Input what class you want to be.
@@ -81,11 +82,8 @@ enter = input("Please press Enter to continue.\n")
 
 print("You are now ready to play.\n")  # Tells the user that they are ready to play the game.
 
-enter = input("Please press Enter to continue.\n") # Press the enter key to continue the game.
+enter = input("Please press Enter to continue.\n")  # Press the enter key to continue the game.
 
 print("An old mage tells you to go to the Dungeon and kill a Skeleton to prove your worth.\n")  # NPC tells you to go kill a monster to prove your worth.
 
 skeleton1 = Skeleton("The Skeleton", 10, 4, 5, 5)  # This creates a new Skeleton enemy. The order is the Name, HP, ATK, DEF, and Damage.
-
-
-
