@@ -11,6 +11,7 @@ name = input("Choose your name.\n")  # Choose the name of your character.
 
 
 class Warrior:  # The Warrior class values.
+    Name = "warrior"
     HP = 10
     ATK = 10
     DEF = 10
@@ -18,6 +19,7 @@ class Warrior:  # The Warrior class values.
 
 
 class Mage:  # The Mage class values.
+    Name = "mage"
     HP = 10
     ATK = 10
     DEF = 5
@@ -25,6 +27,7 @@ class Mage:  # The Mage class values.
 
 
 class Rogue:  # The Rogue class values.
+    Name = "rogue"
     HP = 10
     ATK = 10
     DEF = 8
@@ -40,11 +43,10 @@ class Skeleton:
         self.Damage = Damage
 
 
-def attack(attacker, attackee):
+def attack(attacker, attackee):  # The attack function
     hit = random.randint(min_roll, max_roll) + attacker.ATK
 
     if (hit > attackee.DEF):
-        print("It hits.")
         print(attacker.Name, "inflicts", attacker.Damage)
 
         attackee.HP = attackee.HP - attacker.Damage
@@ -56,6 +58,24 @@ def attack(attacker, attackee):
     else:
         print("You missed. Better defend!")
 
+
+def fight(attacker, enemy):  # The attack loop
+    while(attacker.HP >= 0 and enemy.HP >=0):
+        if attacker.HP >= 0 and enemy.HP >= 0:
+            attack(attacker, enemy)
+        else:
+            print("You're dead")
+
+        if enemy.HP >= 0 and attacker.HP >= 0:
+            attack(enemy, attacker)
+        else:
+            print("The enemy is dead")
+
+
+def buff(player):  # Function for buffing the player
+    player.HP = player.HP + 5
+    player.ATK = player.ATK + 5
+    player.DEF = player.DEF + 5
 
 user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")   # Input what class you want to be.
 
@@ -86,4 +106,10 @@ enter = input("Please press Enter to continue.\n")  # Press the enter key to con
 
 print("An old mage tells you to go to the Dungeon and kill a Skeleton to prove your worth.\n")  # NPC tells you to go kill a monster to prove your worth.
 
+enter = input("Please press Enter to continue.\n")
+
 skeleton1 = Skeleton("The Skeleton", 10, 4, 5, 5)  # This creates a new Skeleton enemy. The order is the Name, HP, ATK, DEF, and Damage.
+
+fight(theClass, skeleton1)
+
+buff(theClass)  # This calls the buff function to give the player a level up (of sorts)
