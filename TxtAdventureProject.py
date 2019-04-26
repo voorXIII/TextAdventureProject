@@ -34,7 +34,7 @@ class Rogue:  # The Rogue class values.
     Damage = random.randint(1, 10)
 
 
-class Skeleton:
+class Enemy:
     def __init__(self, Name, HP, ATK, DEF, Damage):
         self.Name = Name
         self.HP = HP
@@ -45,6 +45,7 @@ class Skeleton:
 
 def attack(attacker, attackee):  # The attack function
     hit = random.randint(min_roll, max_roll) + attacker.ATK
+    death = 0
 
     if (hit > attackee.DEF):
         print(attacker.Name, "inflicts", attacker.Damage)
@@ -53,29 +54,44 @@ def attack(attacker, attackee):  # The attack function
 
         if attackee.HP <= 0:  # if the attackee's health drops below zero
             print("With a forceful attack,", attackee.Name, "dies.")
+            death = 1
+
         else:
             print(attackee.Name, "has", attackee.HP, "HP remaining.")
+            death = 0
+
     else:
         print("You missed. Better defend!")
 
+    return death
+
 
 def fight(attacker, enemy):  # The attack loop
-    while(attacker.HP >= 0 and enemy.HP >=0):
-        if attacker.HP >= 0 and enemy.HP >= 0:
-            attack(attacker, enemy)
+    death = 0
+    while death == 0:
+        if death == 0:
+            death = attack(attacker, enemy)
         else:
             print("You're dead")
+            death = 1
 
-        if enemy.HP >= 0 and attacker.HP >= 0:
-            attack(enemy, attacker)
+        if death == 0:
+            death = attack(enemy, attacker)
         else:
             print("The enemy is dead")
+            death = 1
 
 
 def buff(player):  # Function for buffing the player
-    player.HP = player.HP + 5
-    player.ATK = player.ATK + 5
-    player.DEF = player.DEF + 5
+    print("\nYou've leveled up!")
+    player.HP = player.HP + 5  # Increases player HP by 5
+    player.ATK = player.ATK + 5  # Increases player Attack by 5
+    player.DEF = player.DEF + 5  # Increases player Defense by 5
+
+    print("HP", player.HP)
+    print("Attack", player.ATK)
+    print("Defense", player.DEF)
+
 
 user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")   # Input what class you want to be.
 
@@ -108,7 +124,7 @@ print("An old mage tells you to go to the Dungeon and kill a Skeleton to prove y
 
 enter = input("Please press Enter to continue.\n")
 
-skeleton1 = Skeleton("The Skeleton", 10, 4, 5, 5)  # This creates a new Skeleton enemy. The order is the Name, HP, ATK, DEF, and Damage.
+skeleton1 = Enemy("The Skeleton", 10, 4, 5, 5)  # This creates a new Skeleton enemy. The order is the Name, HP, ATK, DEF, and Damage.
 
 fight(theClass, skeleton1)
 
