@@ -139,14 +139,14 @@ while answer == 'y':  # Death loop to start over if you die.
         buff(theClass)  # This calls the buff function to give the player a level up (of sorts)
 
     if death == 0:
-        goblin1 = Enemy("The Goblin", 20, 15, 20, 20)  # This creates a new Goblin enemy. The order is the Name, HP, ATK, DEF, and Damage.
+        goblin1 = Enemy("The Goblin", 20, 15, 10, 10)  # This creates a new Goblin enemy. The order is the Name, HP, ATK, DEF, and Damage.
         death = fight(theClass, goblin1)
 
     if death == 0:
         buff(theClass)
 
     if death == 0:
-        boss1 = Enemy("The Boss", 30, 20, 30, 30)
+        boss1 = Enemy("The Boss", 30, 20, 20, 15)
         death = fight(theClass, boss1)
 
     if death == 1:
