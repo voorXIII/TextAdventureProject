@@ -3,12 +3,6 @@ import random  # Importing random
 min_roll = 1   # Min roll value
 max_roll = 10  # Max roll value
 
-print("Welcome to the game.\n")  # This welcomes you to the game.
-
-enter = input("Please press Enter to continue.")  # Press the Enter key to continue the game.
-
-name = input("Choose your name.\n")  # Choose the name of your character.
-
 
 class Warrior:  # The Warrior class values.
     Name = "warrior"
@@ -74,12 +68,16 @@ def fight(attacker, enemy):  # The attack loop
         else:
             print("You're dead")
             death = 1
+            player_death = 1
 
         if death == 0:
             death = attack(enemy, attacker)
         else:
             print("The enemy is dead")
             death = 1
+            player_death = 0
+
+            return player_death
 
 
 def buff(player):  # Function for buffing the player
@@ -92,6 +90,24 @@ def buff(player):  # Function for buffing the player
     print("Attack", player.ATK)
     print("Defense", player.DEF)
 
+
+print("Welcome to the game.\n")  # This welcomes you to the game.
+
+enter = input("Please press Enter to continue.")  # Press the Enter key to continue the game.
+
+name = input("Choose your name.\n")  # Choose the name of your character.
+
+answer = 'y'
+while answer == 'y':  # Death loop to start over if you die.
+    death = 0
+    if death == 0:
+        death = fight(theClass, enemy)
+    if death == 1:
+        print("You died")
+        print("Would you like to try that again?")
+        answer = input()
+    else:
+        print("You won!")
 
 user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")   # Input what class you want to be.
 
