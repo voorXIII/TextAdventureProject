@@ -55,29 +55,35 @@ def attack(attacker, attackee):  # The attack function
             death = 0
 
     else:
-        print("You missed. Better defend!")
+        print(attacker.Name, "missed!")
 
     return death
 
 
-def fight(attacker, enemy):  # The attack loop
+def fight(player, enemy):# The attack loop
     death = 0
-    while death == 0:
-        if death == 0:
-            death = attack(attacker, enemy)
-        else:
-            print("You're dead")
-            death = 1
-            player_death = 1
 
-        if death == 0:
-            death = attack(enemy, attacker)
-        else:
+    while death  == 0:
+
+        if death == 0:  # Player attacks the enemy
+            death = attack(player, enemy)
+
+        if death == 0:  # Enemy attacks player
+            death = attack(enemy, player)
+
+            if death == 1:  # If the player dies, do this.
+                print("You're dead")
+                death = 1
+                player_death = 1
+            else:
+                player_death = 0
+
+        else:  # If the enemy dies, do this
             print("The enemy is dead")
             death = 1
             player_death = 0
 
-            return player_death
+    return player_death
 
 
 def buff(player):  # Function for buffing the player
