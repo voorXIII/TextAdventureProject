@@ -82,13 +82,13 @@ def fight(attacker, enemy):  # The attack loop
 
 def buff(player):  # Function for buffing the player
     print("\nYou've leveled up!")
-    player.HP = player.HP + 5  # Increases player HP by 5
-    player.ATK = player.ATK + 5  # Increases player Attack by 5
-    player.DEF = player.DEF + 5  # Increases player Defense by 5
+    player.HP = player.HP + 10  # Increases player HP by 5
+    player.ATK = player.ATK + 10  # Increases player Attack by 5
+    player.DEF = player.DEF + 10  # Increases player Defense by 5
 
     print("HP", player.HP)
     print("Attack", player.ATK)
-    print("Defense", player.DEF)
+    print("Defense", player.DEF, "\n\n")
 
 
 print("Welcome to the game.\n")  # This welcomes you to the game.
@@ -100,48 +100,60 @@ name = input("Choose your name.\n")  # Choose the name of your character.
 answer = 'y'
 while answer == 'y':  # Death loop to start over if you die.
     death = 0
+
+    user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")   # Input what class you want to be.
+
+    while(user_class != 'Warrior' and user_class != 'Mage' and user_class != 'Rogue'):  # If you input another class other than the 3 specified, it gives that print statement and re-runs the class input.
+        print("You did not choose from the required classes, try again.")
+        user_class = input()
+
+    if user_class.lower() == 'warrior':  # Sets the user input to the class
+        theClass = Warrior()
+    elif user_class.lower() == 'mage':
+        theClass = Mage()
+    elif user_class.lower() == 'rogue':
+        theClass = Rogue()
+    else:
+        print("Something's wrong.")
+        exit()
+
+    print("This is your HP.", theClass.HP)  # Tells you your HP value
+    print("This is your Attack.", theClass.ATK)  # Tells you your Attack value
+    print("This is your Defense.", theClass.DEF)  # Tells you your Defense value
+
+    enter = input("Please press Enter to continue.\n")
+
+    print("You are now ready to play.\n")  # Tells the user that they are ready to play the game.
+
+    enter = input("Please press Enter to continue.\n")  # Press the enter key to continue the game.
+
+    print("An old mage tells you to go to the Dungeon and kill a Skeleton to prove your worth.\n")  # NPC tells you to go kill a monster to prove your worth.
+
+    enter = input("Please press Enter to continue.\n")
+
     if death == 0:
-        death = fight(theClass, enemy)
+        skeleton1 = Enemy("The Skeleton", 10, 5, 5, 5)  # This creates a new Skeleton enemy. The order is the Name, HP, ATK, DEF, and Damage.
+        death = fight(theClass, skeleton1)
+
+    if death == 0:
+        buff(theClass)  # This calls the buff function to give the player a level up (of sorts)
+
+    if death == 0:
+        goblin1 = Enemy("The Goblin", 20, 15, 20, 20)  # This creates a new Goblin enemy. The order is the Name, HP, ATK, DEF, and Damage.
+        death = fight(theClass, goblin1)
+
+    if death == 0:
+        buff(theClass)
+
+    if death == 0:
+        boss1 = Enemy("The Boss", 30, 20, 30, 30)
+        death = fight(theClass, boss1)
+
     if death == 1:
         print("You died")
-        print("Would you like to try that again?")
-        answer = input()
+
     else:
         print("You won!")
 
-user_class = input("Choose a class between Warrior, Mage, or Rogue.\n")   # Input what class you want to be.
-
-while(user_class != 'Warrior' and user_class != 'Mage' and user_class != 'Rogue'):  # If you input another class other than the 3 specified, it gives that print statement and re-runs the class input.
-    print("You did not choose from the required classes, try again.")
-    user_class = input()
-
-if user_class.lower() == 'warrior':  # Sets the user input to the class
-    theClass = Warrior()
-elif user_class.lower() == 'mage':
-    theClass = Mage()
-elif user_class.lower() == 'rogue':
-    theClass = Rogue()
-else:
-    print("Something's wrong.")
-    exit()
-
-
-print("This is your HP.", theClass.HP)  # Tells you your HP value
-print("This is your Attack.", theClass.ATK)  # Tells you your Attack value
-print("This is your Defense.", theClass.DEF)  # Tells you your Defense value
-
-enter = input("Please press Enter to continue.\n")
-
-print("You are now ready to play.\n")  # Tells the user that they are ready to play the game.
-
-enter = input("Please press Enter to continue.\n")  # Press the enter key to continue the game.
-
-print("An old mage tells you to go to the Dungeon and kill a Skeleton to prove your worth.\n")  # NPC tells you to go kill a monster to prove your worth.
-
-enter = input("Please press Enter to continue.\n")
-
-skeleton1 = Enemy("The Skeleton", 10, 4, 5, 5)  # This creates a new Skeleton enemy. The order is the Name, HP, ATK, DEF, and Damage.
-
-fight(theClass, skeleton1)
-
-buff(theClass)  # This calls the buff function to give the player a level up (of sorts)
+    print("Would you like to play again?")
+    answer = input()
